@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/userModel');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 router.post('/register', async (req, res)=>{
     
@@ -11,6 +12,14 @@ router.post('/register', async (req, res)=>{
             message: "user already exists"
         })
     }
+    
+    // hasing and salting
+    const salt = bcrypt.genSaltSync(10);
+    console.log(salt);
+
+    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+    req.body.password = hashedPassword;
+
 
     const newUser = await User(req.body);
     await newUser.save();
