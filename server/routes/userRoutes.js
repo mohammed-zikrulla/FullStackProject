@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
-        return res.send({
+        res.send({
         success: false,
         message: "user does not exist Please Register",
       });
@@ -49,13 +49,13 @@ router.post("/login", async (req, res) => {
     );
 
     if (!validPassword) {
-      return res.status(401).send({
+    res.status(401).send({
         success: false,
         message: "Sorry, invalid password entered!",
       });
     }
 
-    return res.send({
+    res.send({
       success: true,
       message: "You've successfully logged in!",
     });
