@@ -15,11 +15,12 @@ function Login() {
             const response = await loginUser(values);
             console.log(response);
             if(response.data.success){
-                // Navigate to another page or show success message
-                navigate('/');
+                const token = response.data.token;
+                localStorage.setItem("token", token);
+                    navigate('/');
             }
             else{
-                // Show error message
+                navigate('/NotFound');
             }
         } catch (error) {
             console.error(error);
