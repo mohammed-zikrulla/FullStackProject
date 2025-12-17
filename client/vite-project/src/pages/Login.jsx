@@ -30,7 +30,7 @@ function Login() {
     return (
         <div className="auth-container">
             <div className="auth-box">
-                <h1 className="title">Login to MovieBook</h1>
+                <h1 className="title">Login to Zaka International</h1>
                 <Form layout="vertical" onFinish={onFinish}>
                     <Form.Item
                         label="Email"
