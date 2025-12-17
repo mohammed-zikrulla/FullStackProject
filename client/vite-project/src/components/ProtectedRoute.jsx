@@ -6,10 +6,10 @@ function ProtectedRoute({children}) {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if(token){
-            navigate('/');
+            navigate('/login');
         }
         else{
-            navigate('/not-found');
+            navigate('/register');
         }
     }, []);
   return (
