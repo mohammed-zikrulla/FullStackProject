@@ -4,7 +4,8 @@ const movieSchema = mongoose.Schema({
     title: {
         type: String,
         required: true
-    },
+    }
+    ,
     description: {
         type: String,
         required: true
@@ -20,17 +21,17 @@ const movieSchema = mongoose.Schema({
     language: {
         type: String,
         required: true
-    },
-    releaseDate: {
-        type: Date,
-        required: true
-    },
+    }
+    // releaseDate: {
+    //     type: Date,
+    //     required: true
+    // },
     // poster: {
     //     type: String,
     //     required: true
     // }
 })
 
-const Movies = mongoose.model('movie', movieSchema);
+const Movie = mongoose.model('movie', movieSchema);
 
-module.exports = Movies;
+module.exports = Movie;

@@ -17,8 +17,7 @@ router.post('/register', async (req, res) => {
 
     // hasing and salting
     const salt = await bcrypt.genSalt(10);
-    console.log(salt);
-
+    
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hashedPassword;
 
