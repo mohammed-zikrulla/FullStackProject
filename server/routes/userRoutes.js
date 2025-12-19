@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt =  require('jsonwebtoken');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 router.post('/register', async (req, res) => {
 
@@ -68,6 +69,20 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+});
+
+router.get('/getValidUser', authMiddleware, async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const userDetails = await (User.findById(userId).select("-password"));
+        res.send({
+            success: true,
+            message: "user is authorized to use the app",
+            data: userDetails
+        });
+    } catch (error) {
+        
+    }
 });
 
 module.exports = router;

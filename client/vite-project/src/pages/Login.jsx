@@ -17,10 +17,11 @@ function Login() {
             if(response.data.success){
                 const token = response.data.token;
                 localStorage.setItem("token", token);
-                    navigate('/');
+                    alert("Login Successful");
+                    navigate('/home');
             }
             else{
-                navigate('/NotFound');
+                alert("Login Failed");
             }
         } catch (error) {
             console.error(error);
