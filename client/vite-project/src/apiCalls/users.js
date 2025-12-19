@@ -9,3 +9,8 @@ export const loginUser = async (values)=>{
    const response = await axiosInstance.post('/api/users/login', values);
    return response;
 }
+
+export const validateUser = async (values)=>{
+   const response = await axiosInstance.post('/api/users/validateUser', values);
+   return response;
+}
