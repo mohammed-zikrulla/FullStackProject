@@ -13,7 +13,6 @@ function Login() {
     const onFinish = async (values) => {
         try {
             const response = await loginUser(values);
-            console.log(response);
             if(response.data.success){
                 const token = response.data.token;
                 localStorage.setItem("token", token);

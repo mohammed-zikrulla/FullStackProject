@@ -10,7 +10,7 @@ export const loginUser = async (values)=>{
    return response;
 }
 
-export const validateUser = async (values)=>{
-   const response = await axiosInstance.post('/api/users/validateUser', values);
+export const GetCurrentUser = async (values)=>{
+   const response = await axiosInstance.get('api/users/getValidUser', values);
    return response;
-}
+} 

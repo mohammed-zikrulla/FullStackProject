@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
 
     // hasing and salting
     const salt = await bcrypt.genSalt(10);
-    
+
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hashedPassword;
 
@@ -74,7 +74,7 @@ router.get('/getValidUser', authMiddleware, async (req, res) => {
     try {
         const userId = req.body.userId;
         const userDetails = await (User.findById(userId).select("-password"));
-        res.send({
+        res.status(200).send({
             success: true,
             message: "user is authorized to use the app",
             data: userDetails
