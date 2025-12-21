@@ -10,15 +10,15 @@ import NotFound from './pages/NotFound'
 function App() {
 
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Login />} />
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/home" element={<ProtectedRoute><Home/></ProtectedRoute>} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/not-found" element={<ProtectedRoute><NotFound /></ProtectedRoute>} />
-        </Routes>
-      </BrowserRouter>
+        <Route path="*" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

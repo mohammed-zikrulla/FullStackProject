@@ -15,7 +15,7 @@ function Register() {
     return (
         <div className="auth-container" >
             <div className="auth-box">
-                <h1 className="title">Register for MovieBook</h1>
+                <h1 className="title">Register for Zaka International</h1>
                 <Form layout="vertical" onFinish={registerData}>
                     <Form.Item
                         label="Name"
