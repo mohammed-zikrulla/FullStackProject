@@ -21,15 +21,16 @@ const movieSchema = mongoose.Schema({
     language: {
         type: String,
         required: true
-    }
+    },
     // releaseDate: {
+
     //     type: Date,
     //     required: true
     // },
-    // poster: {
-    //     type: String,
-    //     required: true
-    // }
+    poster: {
+        type: String,
+        required: true
+    }
 })
 
 const Movie = mongoose.model('movie', movieSchema);
