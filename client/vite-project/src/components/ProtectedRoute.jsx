@@ -44,18 +44,18 @@ function ProtectedRoute({children}) {
       children: [
         { 
           label: (
-            <span onClick={()=>{
-              if(user.role==='admin'){
+            <button onClick={()=>{
+              if(user?.role==='admin'){
                 navigate('/admin')
               } 
-              else if(user.role==='partner'){
+              else if(user?.role==='partner'){
                 navigate('/partner')
               } else{
                 navigate('/user')
               }
-            }}>
+            }} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0 }}>
               My Profile
-            </span>
+            </button>
           ),
           icon: <ProfileOutlined />,
         },
