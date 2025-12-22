@@ -17,8 +17,6 @@ function ProtectedRoute({children}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state=> state.user.user)
-    console.log(user);
-
 
     const getValidUser =async ()=>{
       const response = await GetCurrentUser();
