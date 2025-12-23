@@ -20,7 +20,7 @@ const items = [
 ];
 
 function Admin() {
-  return <Tabs defaultActiveKey="2" items={items} onChange={onChange} />;
+  return <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
 }
 
 export default Admin;
