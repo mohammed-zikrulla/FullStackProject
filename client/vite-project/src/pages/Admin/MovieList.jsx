@@ -1,9 +1,27 @@
-import React from 'react'
+import React from "react";
+import TableFromAntD from "../../components/TableFromAntD";
+import { getAllMovies } from "../../apiCalls/movies";
+import MovieForm from "./MovieFrom";
+import { useEffect } from "react";
 
 function MovieList() {
+  useEffect(() => {
+    fetchMoviesData();
+  }, []);
+
+  const [moviesData, setMoviesData] = React.useState([]);
+
+  const fetchMoviesData = async () => {
+    const response = await getAllMovies();
+    setMoviesData(response.data.data);
+  };
+
   return (
-    <div>this is Movie List</div>
-  )
+    <>
+      <TableFromAntD moviesData={moviesData} />
+      <MovieForm />
+    </>
+  );
 }
 
-export default MovieList
+export default MovieList;
