@@ -1,14 +1,14 @@
-import React from 'react'
-import { getAllMovies } from '../apiCalls/movies';
-import { useEffect } from 'react';
-import { setMovies } from '../../Redux/movieSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import CardFromAntD from '../components/CardFromAntD';
-import { Flex } from 'antd';
+import React from "react";
+import { getAllMovies } from "../apiCalls/movies";
+import { useEffect } from "react";
+import { setMovies } from "../../Redux/movieSlice";
+import { useDispatch, useSelector } from "react-redux";
+import CardFromAntD from "../components/CardFromAntD";
+import { Flex } from "antd";
 
 function Home() {
   const dispatch = useDispatch();
-  const movies = useSelector(state => state.movie.movies);
+  const movies = useSelector((state) => state.movie.movies);
   console.log(movies);
 
   useEffect(() => {
@@ -24,15 +24,18 @@ function Home() {
     }
   };
 
-
-
   return (
-    <Flex wrap gap="large">{movies.map(movie =>
-      <CardFromAntD key={movie._id} poster={movie.poster} title={movie.title} description={movie.description} />
-    )
-    }
+    <Flex wrap gap="large">
+      {movies.map((movie) => (
+        <CardFromAntD
+          key={movie._id}
+          poster={movie.poster}
+          title={movie.title}
+          description={movie.description}
+        />
+      ))}
     </Flex>
-  )
+  );
 }
 
-export default Home
+export default Home;
