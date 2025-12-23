@@ -34,7 +34,7 @@ function ProtectedRoute({ children }) {
   const navItems = [
     {
       label: "Home",
-      icon: <HomeOutlined />,
+      icon: <HomeOutlined onClick={()=> navigate('/home')} />,
     },
     {
       label: `${user ? user.name : ""}`,
