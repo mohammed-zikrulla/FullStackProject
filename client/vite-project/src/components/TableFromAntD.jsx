@@ -1,5 +1,6 @@
 
 import { Table } from "antd";
+import moment from "moment";
 const columns = [
   {
     title: "Poster",
@@ -28,6 +29,12 @@ const columns = [
     title: "Genre",
     dataIndex: "genre",
     key: "genre",
+  },
+  {
+    title: "Release Date",
+    dataIndex: "releaseDate",
+    key: "releaseDate",
+    render: (relDate) => <div>{moment(relDate).format("DD-MM-YYYY")}</div>,
   },
   {
     title: "Language",
