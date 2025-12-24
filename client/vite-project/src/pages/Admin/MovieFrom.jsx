@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Col, Row, Input, Select, Button, message, Modal } from "antd";
+import { addMovie } from "../../apiCalls/movies";
 const { TextArea } = Input;
 
-function MovieForm() {
+function MovieForm({ getData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -11,13 +12,35 @@ function MovieForm() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const onFinish = (values) => {
+    addMovie(values)
+    .then((response)=>{
+        if(response.success){
+            getData();
+            message.success(response.message);
+        }else{
+            message.error(response.message);
+        }
+    }).catch((error)=>{
+        console.log(error.message);
+    }).finally(()=>{
+        setIsModalOpen(false);
+    });
+  };
+
   return (
     <>
       <Button type="primary" onClick={showModal} onCancel={handleCancel}>
         Add Movies
       </Button>
       <Modal width={900} open={isModalOpen} onCancel={handleCancel}>
-        <Form layout="vertical" style={{ width: "100%" }}>
+        <Form
+          onFinish={onFinish}
+          autoComplete="off"
+          layout="vertical"
+          style={{ width: "100%" }}
+        >
           <Row
             gutter={{
               xs: 6,
@@ -30,7 +53,7 @@ function MovieForm() {
               <Form.Item
                 label="Movie Name"
                 htmlFor="title"
-                name="Movie Name"
+                name="title"
                 className="d-block"
                 rules={[{ required: true, message: "Movie name is required!" }]}
               >

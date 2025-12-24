@@ -19,7 +19,7 @@ function MovieList() {
   return (
     <>
       <TableFromAntD moviesData={moviesData} />
-      <MovieForm />
+      <MovieForm getData={fetchMoviesData}/>
     </>
   );
 }

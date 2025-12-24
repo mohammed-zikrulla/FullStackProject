@@ -22,11 +22,11 @@ const movieSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    // releaseDate: {
+    releaseDate: {
 
-    //     type: Date,
-    //     required: true
-    // },
+        type: Date,
+        required: true
+    },
     poster: {
         type: String,
         required: true
