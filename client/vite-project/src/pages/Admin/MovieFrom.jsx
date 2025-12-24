@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import { Form, Col, Row, Input, Select, Button, message, Modal } from "antd";
 const { TextArea } = Input;
 
@@ -13,11 +13,11 @@ function MovieForm() {
   };
   return (
     <>
-      <Button type="primary" onClick={showModal}  onCancel={handleCancel}>
+      <Button type="primary" onClick={showModal} onCancel={handleCancel}>
         Add Movies
       </Button>
       <Modal width={900} open={isModalOpen} onCancel={handleCancel}>
-        <Form layout="vertical" style={{ width: "100%"}}>
+        <Form layout="vertical" style={{ width: "100%" }}>
           <Row
             gutter={{
               xs: 6,
