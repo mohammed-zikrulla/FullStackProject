@@ -36,9 +36,8 @@ export const updateMovie = async (payload) => {
 // Delete a movie
 export const deleteMovie = async (payload) => {
   try {
-    const response = await axiosInstance.post(
-      "api/movies/delete-movie",
-      payload
+    const response = await axiosInstance.delete(
+      "api/movies/delete-movie/" + payload.movieId,
     );
     return response.data;
   } catch (err) {
