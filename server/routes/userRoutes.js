@@ -1,42 +1,40 @@
-const express = require('express');
-const User = require('../models/userModel');
+const express = require("express");
+const User = require("../models/userModel");
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const jwt =  require('jsonwebtoken');
-const authMiddleware = require('../middlewares/authMiddleware');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const authMiddleware = require("../middlewares/authMiddleware");
 
-router.post('/register', async (req, res) => {
-
-    const userExists = await User.findOne({ email: req.body.email })
-    if (userExists) {
-        res.send({
-            success: false,
-            message: "user already exists"
-        })
-    }
-
-    // hasing and salting
-    const salt = await bcrypt.genSalt(10);
-
-    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-    req.body.password = hashedPassword;
-
-
-    const newUser = await User(req.body);
-    await newUser.save();
-
+router.post("/register", async (req, res) => {
+  const userExists = await User.findOne({ email: req.body.email });
+  if (userExists) {
     res.send({
-        success: true,
-        message: 'user registered successfully'
-    })
-})
+      success: false,
+      message: "user already exists",
+    });
+  }
+
+  // hasing and salting
+  const salt = await bcrypt.genSalt(10);
+
+  const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+  req.body.password = hashedPassword;
+
+  const newUser = await User(req.body);
+  await newUser.save();
+
+  res.send({
+    success: true,
+    message: "user registered successfully",
+  });
+});
 
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
-        res.send({
+      res.send({
         success: false,
         message: "user does not exist Please Register",
       });
@@ -50,7 +48,7 @@ router.post("/login", async (req, res) => {
     );
 
     if (!validPassword) {
-    res.status(401).send({
+      res.status(401).send({
         success: false,
         message: "Sorry, invalid password entered!",
       });
@@ -63,25 +61,23 @@ router.post("/login", async (req, res) => {
     res.send({
       success: true,
       message: "You've successfully logged in!",
-      token: jwtToken
+      token: jwtToken,
     });
   } catch (error) {
     console.error(error);
   }
 });
 
-router.get('/getValidUser', authMiddleware, async (req, res) => {
-    try {
-        const userId = req.body.userId;
-        const userDetails = await (User.findById(userId).select("-password"));
-        res.status(200).send({
-            success: true,
-            message: "user is authorized to use the app",
-            data: userDetails
-        });
-    } catch (error) {
-        
-    }
+router.get("/getValidUser", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const userDetails = await User.findById(userId).select("-password");
+    res.status(200).send({
+      success: true,
+      message: "user is authorized to use the app",
+      data: userDetails,
+    });
+  } catch (error) {}
 });
 
 module.exports = router;
