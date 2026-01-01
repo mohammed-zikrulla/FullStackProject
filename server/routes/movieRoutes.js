@@ -1,89 +1,89 @@
-const express = require('express');
-const Movie = require('../models/movieModel');
+const express = require("express");
+const Movie = require("../models/movieModel");
 
 const router = express.Router();
 
-router.get('/get-all-movies', async (req, res) => {
-    try {
-        const allMovies = await Movie.find();
-        res.send({
-            success: true,
-            data: allMovies
-        })
-    } catch (error) {
-        res.send({
-            success: false,
-            data: error.message
-        })
-    }
+router.get("/get-all-movies", async (req, res) => {
+  try {
+    const allMovies = await Movie.find();
+    res.send({
+      success: true,
+      data: allMovies,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      data: error.message,
+    });
+  }
+});
 
-})
+router.get("/movie/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findById(req.params.id);
+    res.send({
+      success: true,
+      message: "fetched movie successfully",
+      data: movie,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
-router.get('/movie/:id', async (req, res) => {
-    try {
-        const movie = await Movie.findById(req.params.id);
-        res.send({
-            success: true,
-            message: "fetched movie successfully",
-            data: movie
-        })
-    } catch (error) {
-        res.send({
-            success: false,
-            message: error.message,
-        })
-    }
-})
+router.put("/update-movie", async (req, res) => {
+  try {
+    const movie = await Movie.findByIdAndUpdate(req.body.movieId, req.body, {
+      new: true,
+    });
+    await movie.save();
+    res.send({
+      success: true,
+      message: "movie updated!",
+      data: movie,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      data: error.message,
+    });
+  }
+});
 
-router.put('/update-movie', async(req, res)=>{
-    try {
-        const movie = await Movie.findByIdAndUpdate(req.body.movieId, req.body, {new: true});
-        await movie.save();
-        res.send({
-            success: true,
-            message: "movie updated!",
-            data: movie
-        })
-    } catch (error) {
-        res.send({
-            success: false,
-            data: error.message
-        })
-    }
-})
+router.post("/add-movie", async (req, res) => {
+  try {
+    const newMovie = await Movie(req.body);
+    await newMovie.save();
 
-router.post('/add-movie', async (req, res) => {
-    try {
-        const newMovie = await Movie(req.body);
-        await newMovie.save();
+    res.send({
+      success: true,
+      message: "Movie Added successfully",
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
-        res.send({
-            success: true,
-            message: 'Movie Added successfully'
-        })
-    } catch (error) {
-        res.send({
-            success: false,
-            message: error.message
-        })
-    }
-})
-
-router.delete('/delete-movie/:id', async (req, res) => {
-    try {
-        const movie = await Movie.findByIdAndDelete(req.params.id);
-        res.send({
-            success: true,
-            message: "movie deleted!",
-            data: movie
-        })
-    } catch (error) {
-        res.send({
-            success: false,
-            message: error.message
-        })
-    }
-})
-
+router.delete("/delete-movie/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findByIdAndDelete(req.params.id);
+    res.send({
+      success: true,
+      message: "movie deleted!",
+      data: movie,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 module.exports = router;
