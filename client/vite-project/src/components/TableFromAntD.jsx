@@ -1,4 +1,3 @@
-
 import { Table } from "antd";
 import moment from "moment";
 const columns = [
@@ -6,7 +5,9 @@ const columns = [
     title: "Poster",
     dataIndex: "poster",
     key: "poster",
-    render: (text) => <img height={60} src={text} alt="poster" style={{ width: "50px" }} />,
+    render: (text) => (
+      <img height={60} src={text} alt="poster" style={{ width: "50px" }} />
+    ),
   },
   {
     title: "Movie Name",
@@ -23,7 +24,12 @@ const columns = [
     title: "Duration",
     dataIndex: "duration",
     key: "duration",
-    render: (text) => <div>{text}{" mins"}</div>,
+    render: (text) => (
+      <div>
+        {text}
+        {" mins"}
+      </div>
+    ),
   },
   {
     title: "Genre",
