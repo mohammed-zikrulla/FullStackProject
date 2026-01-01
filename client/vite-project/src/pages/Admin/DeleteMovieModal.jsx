@@ -1,7 +1,7 @@
 import { Modal, message } from "antd";
 import { deleteMovie } from "../../apiCalls/movies";
-import { showLoading, hideLoading } from "../../redux/loaderSlice";
 import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../../../Redux/loaderSlice";
 
 const DeleteMovieModal = ({
   isDeleteModalOpen,
@@ -39,17 +39,21 @@ const DeleteMovieModal = ({
   };
 
   return (
-    <Modal
-      title="Delete Movie?"
-      open={isDeleteModalOpen}
-      onOk={handleOk}
-      onCancel={handleCancel}
-    >
-      <p className="pt-3 fs-18">Are you sure you want to delete this movie?</p>
-      <p className="pb-3 fs-18">
-        This action can't be undone and you'll lose this movie data.
-      </p>
-    </Modal>
+    <>
+      <Modal
+        title="Delete Movie?"
+        open={isDeleteModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p className="pt-3 fs-18">
+          Are you sure you want to delete this movie?
+        </p>
+        <p className="pb-3 fs-18">
+          This action can't be undone and you'll lose this movie data.
+        </p>
+      </Modal>
+    </>
   );
 };
 

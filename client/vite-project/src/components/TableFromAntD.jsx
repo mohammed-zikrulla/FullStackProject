@@ -1,56 +1,94 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import moment from "moment";
-const columns = [
-  {
-    title: "Poster",
-    dataIndex: "poster",
-    key: "poster",
-    render: (text) => (
-      <img height={60} src={text} alt="poster" style={{ width: "50px" }} />
-    ),
-  },
-  {
-    title: "Movie Name",
-    dataIndex: "title",
-    key: "title",
-  },
-  {
-    title: "id",
-    dataIndex: "_id",
-    key: "_id",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Duration",
-    dataIndex: "duration",
-    key: "duration",
-    render: (text) => (
-      <div>
-        {text}
-        {" mins"}
-      </div>
-    ),
-  },
-  {
-    title: "Genre",
-    dataIndex: "genre",
-    key: "genre",
-  },
-  {
-    title: "Release Date",
-    dataIndex: "releaseDate",
-    key: "releaseDate",
-    render: (relDate) => <div>{moment(relDate).format("DD-MM-YYYY")}</div>,
-  },
-  {
-    title: "Language",
-    dataIndex: "language",
-    key: "language",
-  },
-];
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import React, { useMemo } from "react";
 
-const TableFromAntD = ({ moviesData }) => (
-  <Table columns={columns} dataSource={moviesData} />
-);
+function TableFromAntD({
+  moviesData,
+  setIsModalOpen,
+  setIsDeleteModalOpen,
+  setSelectedMovie,
+  setFormType,
+}) {
+  const columns = useMemo(
+    () => [
+      {
+        title: "Poster",
+        dataIndex: "poster",
+        render: (poster) => (
+          <img
+            src={poster}
+            alt="poster"
+            style={{ width: 50, height: 60, objectFit: "cover" }}
+          />
+        ),
+      },
+      {
+        title: "Movie Name",
+        dataIndex: "title",
+      },
+      {
+        title: "ID",
+        dataIndex: "_id",
+        ellipsis: true,
+      },
+      {
+        title: "Duration",
+        dataIndex: "duration",
+        render: (duration) => `${duration} mins`,
+      },
+      {
+        title: "Genre",
+        dataIndex: "genre",
+      },
+      {
+        title: "Release Date",
+        dataIndex: "releaseDate",
+        render: (date) => moment(date).format("DD-MM-YYYY"),
+      },
+      {
+        title: "Language",
+        dataIndex: "language",
+      },
+      {
+        title: "Action",
+        render: (_, record) => (
+          <div style={{ display: "flex", gap: 10 }}>
+            <Button
+              type="primary"
+              onClick={() => {
+                setSelectedMovie(record);
+                setFormType("edit");
+                setIsModalOpen(true);
+              }}
+            >
+              <EditOutlined />
+            </Button>
+
+            <Button
+              danger
+              onClick={() => {
+                setSelectedMovie(record);
+                setIsDeleteModalOpen(true);
+              }}
+            >
+              <DeleteOutlined />
+            </Button>
+          </div>
+        ),
+      },
+    ],
+    []
+  );
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={moviesData}
+      rowKey="_id"
+      pagination={{ pageSize: 8 }}
+    />
+  );
+}
 
 export default TableFromAntD;
