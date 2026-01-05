@@ -32,7 +32,7 @@ function Home() {
           poster={movie.poster}
           title={movie.title}
           description={movie.description}
-        />
+        /> 
       ))}
     </Flex>
   );
